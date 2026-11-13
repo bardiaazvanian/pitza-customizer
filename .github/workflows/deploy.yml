@@ -20,13 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - run: npm ci
-      - run: npm run build
+      # the Neapolitan customizer is a single self-contained HTML file:
+      # no Node build, just publish it as the homepage (and keep the old path alive)
+      - run: mkdir -p dist && cp neapolitan.html dist/index.html && cp neapolitan.html dist/neapolitan.html
 
       - uses: actions/configure-pages@v5
         with:
