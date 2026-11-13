@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>پیتزا ناپولیتان — ساخت پیتزای خودت</title>
+<meta name="description" content="پیتزای ناپولیتانی به سلیقهٔ خودت بساز: پایه مارگاریتا، حداکثر ۵ افزودنی، تنور چوبی." />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23C6401E'/%3E%3Ccircle cx='16' cy='16' r='9' fill='%23F7EFE2'/%3E%3Ccircle cx='13' cy='13' r='2.6' fill='%23C6401E'/%3E%3Ccircle cx='19' cy='18' r='2.2' fill='%23C6401E'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --flour:#F7EFE2; --paper:#FFFBF2; --ink:#2B1D12; --ink2:#7A6450;
+  --tomato:#C6401E; --tomato-deep:#9E2F12; --basil:#3E7C36; --crust:#D9A55E;
+  --line:rgba(43,29,18,.13); --warm-shadow:0 18px 40px -18px rgba(72,40,12,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Vazirmatn",system-ui,sans-serif;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(255,241,214,.85), transparent 60%),
+    var(--flour);
+  color:var(--ink);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+html[dir="ltr"] body{font-family:"Vazirmatn",system-ui,sans-serif;letter-spacing:.01em}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:3px solid #d8431f;outline-offset:2px;border-radius:6px}
+::selection{background:rgba(198,64,30,.22)}
+
+.display{font-weight:700}
+html[lang="fa"] .display{font-family:"Lalezar","Vazirmatn",serif;font-weight:400;letter-spacing:0}
+html[lang="en"] .display{font-family:"Fraunces",Georgia,serif}
+
+/* ---------- header ---------- */
+header{
+  position:sticky;top:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 20px;
+  background:rgba(247,239,226,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{width:34px;height:34px;flex:0 0 auto}
+.brand-name{font-size:24px;line-height:1;color:var(--ink)}
+.brand-sub{display:block;font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--ink2);text-transform:uppercase;margin-top:2px}
+.hdr-actions{display:flex;align-items:center;gap:10px}
+.lang-btn{
+  min-width:52px;min-height:40px;padding:6px 12px;border-radius:12px;
+  border:1.5px solid var(--line);font-weight:700;font-size:13px;color:var(--ink2);
+  transition:color .15s,border-color .15s;
+}
+.lang-btn:hover{color:var(--ink);border-color:var(--ink2)}
+.cart-btn{
+  position:relative;display:grid;place-items:center;width:44px;height:44px;
+  border-radius:12px;border:1.5px solid var(--line);transition:border-color .15s,background .15s;
+}
+.cart-btn:hover{background:rgba(43,29,18,.05)}
+.cart-badge{
+  position:absolute;top:-7px;inset-inline-start:-7px;
+  min-width:20px;height:20px;padding:0 5px;border-radius:999px;
+  background:var(--tomato);color:#fff;font-size:11px;font-weight:800;
+  display:grid;place-items:center;
+}
+.cart-badge[hidden]{display:none}
+
+/* ---------- hero ---------- */
+.hero{max-width:1080px;margin:0 auto;padding:18px 20px 6px;text-align:center}
+.hero h1{font-size:clamp(26px,4.6vw,40px);line-height:1.25}
+.hero p{margin-top:6px;color:var(--ink2);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:12px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 13px;border-radius:999px;background:rgba(198,64,30,.08);
+  color:#8E2F12;font-size:12.5px;font-weight:700;
+}
+.chip svg{width:14px;height:14px}
+
+/* ---------- layout ---------- */
+main{
+  max-width:1180px;margin:0 auto;padding:8px 20px 140px;
+  display:grid;grid-template-columns:1fr;gap:8px;
+}
+@media(min-width:1024px){
+  main{grid-template-columns:minmax(0,1.05fr) minmax(430px,530px);align-items:start;gap:36px;padding-bottom:150px}
+  .stage{position:sticky;top:70px;height:calc(100vh - 170px)}
+}
+.stage{display:grid;place-items:center;padding:6px 0 2px}
+.stage svg{width:min(100%,56vh,540px);height:auto;filter:drop-shadow(0 26px 34px rgba(72,40,12,.32))}
+@media(min-width:1024px){.stage svg{width:min(100%,calc(100vh - 250px),600px)}}
+
+/* ---------- steps ---------- */
+.panel{min-width:0}
+.base-line{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:14px;margin-bottom:12px;
+  background:rgba(62,124,54,.08);color:#2E5A28;font-size:13.5px;font-weight:600;
+}
+.base-line svg{width:16px;height:16px;flex:0 0 auto}
+.steps{
+  display:flex;gap:4px;overflow-x:auto;padding-bottom:2px;
+  scrollbar-width:none;
+}
+.steps::-webkit-scrollbar{display:none}
+@media(min-width:1024px){
+  .step-tab{padding:10px 10px 12px;font-size:13.5px;gap:6px}
+  .panel{padding-inline-start:4px}
+}
+.step-tab{
+  flex:1 0 auto;display:flex;align-items:center;gap:8px;
+  padding:10px 14px 12px;border-radius:14px 14px 0 0;
+  color:var(--ink2);font-weight:700;font-size:14px;white-space:nowrap;
+  border-bottom:3px solid transparent;
+  transition:color .15s,border-color .2s,background .15s;
+}
+.step-tab .n{
+  display:grid;place-items:center;width:24px;height:24px;border-radius:999px;
+  background:rgba(43,29,18,.08);font-size:12px;font-weight:800;
+  transition:background .15s,color .15s;
+}
+.step-tab[aria-selected="true"]{color:var(--tomato);border-bottom-color:var(--tomato);background:rgba(198,64,30,.05)}
+.step-tab[aria-selected="true"] .n{background:var(--tomato);color:#fff}
+.step-tab:hover{color:var(--ink)}
+
+.cap-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:34px;padding:6px 4px}
+.step-note{color:var(--ink2);font-size:13px;line-height:1.6}
+.count-chip{
+  flex:0 0 auto;padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:800;
+  background:rgba(43,29,18,.07);color:var(--ink2);transition:background .2s,color .2s;
+}
+.count-chip.full{background:rgba(198,64,30,.14);color:var(--tomato-deep)}
+
+/* ---------- option cards ---------- */
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:10px;padding-bottom:8px}
+@media(max-width:480px){.opts{grid-template-columns:1fr 1fr;gap:8px}
+  .card{flex-direction:column;align-items:flex-start;gap:8px}
+  .card .thumb{width:100%;height:64px;display:grid;place-items:center;background:rgba(43,29,18,.04);border-radius:12px}
+}
+.card{
+  display:flex;align-items:center;gap:10px;text-align:start;
+  padding:10px 12px;border-radius:16px;background:var(--paper);
+  border:1.5px solid var(--line);
+  transition:border-color .15s,box-shadow .15s,transform .12s;
+}
+.card:hover:not(:disabled){border-color:rgba(43,29,18,.4)}
+.card.sel{border-color:var(--tomato);box-shadow:0 8px 20px -10px rgba(158,47,18,.45);background:#fff}
+.card:active:not(:disabled){transform:scale(.985)}
+.card:disabled{cursor:not-allowed;opacity:.45}
+.card.inc{cursor:default;background:rgba(62,124,54,.05);border-color:rgba(62,124,54,.25)}
+.thumb{width:46px;height:46px;flex:0 0 auto;display:grid;place-items:center}
+.thumb svg{width:100%;height:100%}
+.meta{min-width:0;flex:1}
+.nm{display:block;font-weight:700;font-size:14.5px;line-height:1.35}
+.pr{display:block;color:var(--ink2);font-size:12.5px;margin-top:2px}
+.pr .free{color:var(--basil);font-weight:700}
+.state{flex:0 0 auto;width:26px;height:26px;display:grid;place-items:center;border-radius:999px;border:1.5px solid var(--line);color:transparent;transition:all .15s}
+.card.sel .state{background:var(--tomato);border-color:var(--tomato);color:#fff}
+.inc-badge{
+  flex:0 0 auto;padding:4px 9px;border-radius:999px;font-size:10.5px;font-weight:800;
+  background:rgba(62,124,54,.14);color:var(--basil);
+}
+.ab-badge{
+  flex:0 0 auto;padding:4px 9px;border-radius:999px;font-size:10.5px;font-weight:800;
+  background:rgba(198,64,30,.1);color:var(--tomato-deep);
+}
+
+/* ---------- sticky bar ---------- */
+.bar{
+  position:fixed;bottom:0;inset-inline:0;z-index:45;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:rgba(247,239,226,.94);backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+}
+@media(min-width:720px){
+  .bar{inset-inline:0;bottom:16px;margin-inline:auto;width:min(680px,calc(100% - 40px));
+    border:1px solid var(--line);border-radius:20px;box-shadow:var(--warm-shadow);padding:12px 20px}
+}
+.bar-total{display:flex;align-items:center;gap:10px;min-width:0}
+.bar-label{font-size:12px;color:var(--ink2);font-weight:600}
+.bar-price{font-size:clamp(19px,3vw,24px);line-height:1.1;transition:transform .15s}
+.bar-price.tick{transform:scale(1.07)}
+.add-btn{
+  min-height:48px;padding:12px 22px;border-radius:15px;
+  background:var(--tomato);color:#fff;font-weight:800;font-size:15px;
+  display:inline-flex;align-items:center;gap:8px;justify-content:center;
+  box-shadow:0 10px 22px -8px rgba(158,47,18,.6);
+  transition:background .15s,transform .12s;
+}
+.add-btn:hover{background:var(--tomato-deep)}
+.add-btn:active{transform:scale(.97)}
+.add-btn svg{width:18px;height:18px}
+
+/* ---------- drawer ---------- */
+.backdrop{position:fixed;inset:0;z-index:50;background:rgba(30,18,8,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+.backdrop.open{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;bottom:0;inset-inline-end:0;z-index:51;
+  width:min(430px,100%);
+  background:var(--flour);box-shadow:0 0 60px rgba(30,18,8,.35);
+  display:flex;flex-direction:column;
+  transform:translateX(110%);
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+}
+html[dir="rtl"] .drawer{transform:translateX(-110%)}
+.drawer.open{transform:translateX(0)}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--line)}
+.drawer-hd h2{font-size:22px}
+.x-btn{width:38px;height:38px;display:grid;place-items:center;border-radius:10px;color:var(--ink2);transition:background .15s}
+.x-btn:hover{background:rgba(43,29,18,.07)}
+.drawer-body{flex:1;overflow-y:auto;padding:14px 18px}
+.drawer-ft{padding:14px 18px calc(16px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.line-item{
+  display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line);
+}
+.line-item:last-child{border-bottom:0}
+.line-thumb{width:58px;height:58px;flex:0 0 auto;border-radius:14px;background:rgba(43,29,18,.05);display:grid;place-items:center;padding:3px}
+.line-thumb svg{width:100%;height:100%}
+.line-meta{flex:1;min-width:0}
+.line-name{font-weight:700;font-size:13.5px;line-height:1.4}
+.line-price{font-size:13px;color:var(--ink2);margin-top:2px}
+.qty{display:flex;align-items:center;gap:2px}
+.qty button{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--line);display:grid;place-items:center;transition:background .15s}
+.qty button:hover{background:rgba(43,29,18,.06)}
+.qty span{min-width:26px;text-align:center;font-weight:800;font-size:14px}
+.rm{color:var(--tomato-deep);width:34px;height:34px;display:grid;place-items:center;border-radius:10px}
+.rm:hover{background:rgba(198,64,30,.1)}
+.drawer-total{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:12px}
+.drawer-total .lbl{color:var(--ink2);font-size:13px;font-weight:600}
+.drawer-total .val{font-size:24px}
+.drawer-btns{display:flex;flex-direction:column;gap:8px}
+.ghost-btn{
+  min-height:46px;border-radius:14px;border:1.5px solid var(--line);
+  font-weight:700;font-size:14px;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:border-color .15s,background .15s;
+}
+.ghost-btn:hover{border-color:var(--ink2);background:rgba(43,29,18,.04)}
+.empty-cart{text-align:center;padding:44px 10px;color:var(--ink2)}
+.empty-cart svg{width:72px;height:52px;margin-bottom:12px;opacity:.6}
+.empty-cart p{font-size:14px;line-height:1.7}
+.demo-note{margin-top:10px;text-align:center;font-size:11.5px;color:var(--ink2)}
+.confirm{text-align:center;padding:40px 10px}
+.confirm .ok{
+  width:76px;height:76px;margin:0 auto 16px;border-radius:999px;
+  background:rgba(62,124,54,.14);display:grid;place-items:center;
+}
+.confirm h3{font-size:26px;margin-bottom:8px}
+.confirm p{color:var(--ink2);font-size:14px;line-height:1.8}
+.confirm .code{font-weight:800;color:var(--ink)}
+
+/* ---------- toast ---------- */
+.toast{
+  position:fixed;bottom:92px;inset-inline:0;z-index:60;display:flex;justify-content:center;pointer-events:none;
+}
+.toast span{
+  background:var(--ink);color:var(--flour);padding:9px 18px;border-radius:999px;
+  font-size:13px;font-weight:700;opacity:0;transform:translateY(8px);
+  transition:opacity .2s,transform .2s;
+}
+.toast.show span{opacity:1;transform:translateY(0)}
+
+footer{max-width:1080px;margin:0 auto;padding:0 20px 130px;text-align:center;color:var(--ink2);font-size:12px}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="17" fill="#C6401E"/>
+      <circle cx="20" cy="20" r="11.5" fill="#F7EFE2"/>
+      <circle cx="16.5" cy="16.5" r="3" fill="#C6401E"/>
+      <circle cx="23" cy="22" r="2.6" fill="#C6401E"/>
+      <path d="M27 12 L37 4 L37 15 Q31 18 27.5 15.5 Z" fill="#F7EFE2" stroke="#C6401E" stroke-width="2.6" stroke-linejoin="round"/>
+    </svg>
+    <div>
+      <span class="brand-name display" data-t="brand">پیتزا ناپولیتان</span>
+      <span class="brand-sub" data-t="brandSub">pizza · napoletana</span>
+    </div>
+  </div>
+  <div class="hdr-actions">
+    <button type="button" class="lang-btn" id="langBtn" aria-label="Switch language">EN</button>
+    <button type="button" class="cart-btn" id="cartBtn" aria-label="سبد خرید">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 7h12l1.2 13.2a1 1 0 0 1-1 1.1H5.8a1 1 0 0 1-1-1.1L6 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge" hidden>۰</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1 class="display" data-t="tagline">مارگاریتا پایه‌ست؛ بقیه‌ش با سلیقهٔ تو</h1>
+  <p data-t="sub">ناپولیتانیِ درست‌وحسابی: خمیرِ ۴۸ ساعته، پختِ چوبی و حداکثر ۵ افزودنی.</p>
+  <div class="chips" aria-hidden="true">
+    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg><span data-t="chip1">خمیر ۴۸ ساعته</span></span>
+    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c2 4 6 5.5 6 10a6 6 0 0 1-12 0c0-2 .8-3.5 2-5"/><path d="M12 13c-1.4 1-2 2-2 3.4A2.6 2.6 0 0 0 12 19"/></svg><span data-t="chip2">تنور چوبی ۴۸۵ درجه</span></span>
+    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 12l4-4"/></svg><span data-t="chip3">۹۰ ثانیهٔ پخت</span></span>
+  </div>
+</section>
+
+<main>
+  <div class="stage" id="stage" aria-label="پیش‌نمایش پیتزا"></div>
+
+  <div class="panel">
+    <div class="base-line">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
+      <span data-t="baseLine">همه‌چیز از پایهٔ مارگاریتا شروع می‌شود: سس گوجهٔ سان مارزانو، موزارلای تازه و ریحان.</span>
+    </div>
+
+    <div class="steps" role="tablist" aria-label="مراحل ساخت" id="tabs"></div>
+    <div class="cap-row">
+      <span class="step-note" id="stepNote"></span>
+      <span class="count-chip" id="countChip"></span>
+    </div>
+    <div class="opts" id="opts" role="tabpanel"></div>
+  </div>
+</main>
+
+<div class="bar">
+  <div class="bar-total">
+    <div>
+      <div class="bar-label" data-t="total">مجموع</div>
+      <div class="bar-price display" id="barPrice">۰</div>
+    </div>
+  </div>
+  <button type="button" class="add-btn" id="addBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+    <span data-t="add">افزودن به سبد خرید</span>
+  </button>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-label="سبد خرید" role="dialog" aria-modal="true">
+  <div class="drawer-hd">
+    <h2 class="display" data-t="cart">سبد خرید</h2>
+    <button type="button" class="x-btn" id="closeDrawer" aria-label="بستن">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-ft" id="drawerFt"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span id="toastMsg"></span></div>
+
+<footer data-t="foot">دموی فرانت‌اند — هیچ پرداخت یا داده‌ای ارسال نمی‌شود.</footer>
+
+<script>
+/* ================= data ================= */
+const BASE_PRICE = 950000;
+const MAX_ADDONS = 5;
+const CATEGORIES = ['sauce','cheese','protein','veg','finish'];
+
+const ITEMS = [
+  // sauce (radio, not counted toward cap)
+  {id:'marinara',  cat:'sauce', price:0,      fa:'مارینارا',            en:'Marinara',            art:null,           base:true},
+  {id:'bianca',    cat:'sauce', price:0,      fa:'بیانکا (سفید)',       en:'Bianca (white)',      art:null},
+  {id:'spicy',     cat:'sauce', price:60000,  fa:'گوجهٔ تند',           en:'Spicy tomato',        art:null},
+  {id:'paprika',   cat:'sauce', price:80000,  fa:'کرم پاپریکا',         en:'Paprika cream',       art:null},
+  {id:'alfredo',   cat:'sauce', price:90000,  fa:'آلفردو',              en:'Alfredo',             art:null},
+  {id:'pesto',     cat:'sauce', price:95000,  fa:'پستو',                en:'Pesto',               art:null},
+  // cheese
+  {id:'mozzarella',cat:'cheese',price:0,      fa:'موزارلای تازه',       en:'Fresh mozzarella',    art:null,           base:true},
+  {id:'xmozz',     cat:'cheese',price:145000, fa:'موزارلای اضافه',      en:'Extra mozzarella',    art:null,           n:0},
+  {id:'stracc',    cat:'cheese',price:160000, fa:'استراچیاتلا',         en:'Stracciatella',       art:'stracc',       n:4, md:.26},
+  {id:'goat',      cat:'cheese',price:120000, fa:'پنیر بز',             en:'Goat cheese',         art:'goat',         n:8, md:.12},
+  {id:'parm',      cat:'cheese',price:90000,  fa:'پارمزان',             en:'Parmesan',            art:'parm',         n:9, md:.11},
+  {id:'cheddar',   cat:'cheese',price:90000,  fa:'چدار',                en:'Cheddar',             art:'cheddar',      n:8, md:.12},
+  // protein
+  {id:'pepperoni', cat:'protein',price:155000,fa:'پپرونی',              en:'Pepperoni',           art:'pepperoni',    n:7,  md:.17},
+  {id:'salami',    cat:'protein',price:150000,fa:'سالامی',              en:'Salami',              art:'salami',       n:6,  md:.17},
+  {id:'bacon',     cat:'protein',price:270000,fa:'بیکن',                en:'Bacon',               art:'bacon',        n:4,  md:.22},
+  {id:'chorizo',   cat:'protein',price:210000,fa:'چوریزو',              en:'Chorizo',             art:'chorizo',      n:8,  md:.13},
+  {id:'steak',     cat:'protein',price:360000,fa:'استیک',               en:'Steak',               art:'steak',        n:6,  md:.17},
+  {id:'shrimp',    cat:'protein',price:380000,fa:'میگو',                en:'Shrimp',              art:'shrimp',       n:6,  md:.16},
+  {id:'chicken',   cat:'protein',price:180000,fa:'مرغ',                 en:'Chicken',             art:'chicken',      n:6,  md:.16},
+  // vegetables & flavor
+  {id:'mushroom',  cat:'veg',   price:85000,  fa:'قارچ',                en:'Mushrooms',           art:'mushroom',     n:7,  md:.14},
+  {id:'onion',     cat:'veg',   price:70000,  fa:'پیاز کاراملی',        en:'Caramelized onion',   art:'onion',        n:6,  md:.16},
+  {id:'pepper',    cat:'veg',   price:80000,  fa:'فلفل کبابی',          en:'Roasted bell pepper', art:'pepper',       n:6,  md:.15},
+  {id:'cherry',    cat:'veg',   price:75000,  fa:'گوجه گیلاسی',         en:'Cherry tomato',       art:'cherry',       n:6,  md:.16},
+  {id:'olive',     cat:'veg',   price:65000,  fa:'زیتون',               en:'Olives',              art:'olive',        n:8,  md:.11},
+  // finish (added after the oven)
+  {id:'basil',     cat:'finish',price:30000,  fa:'ریحان تازه',          en:'Fresh basil',         art:'basil',        n:6,  md:.16},
+  {id:'honey',     cat:'finish',price:60000,  fa:'عسل تند',             en:'Hot honey',           art:null,           swirl:true, color:'#D98E1E'},
+  {id:'balsamic',  cat:'finish',price:60000,  fa:'سس بالزامیک',         en:'Balsamic glaze',      art:null,           swirl:true, color:'#331E0D'},
+  {id:'chili',     cat:'finish',price:20000,  fa:'فلفل قرمز پرک',       en:'Chili flakes',        art:'chili',        n:14, md:.07},
+  {id:'dill',      cat:'finish',price:20000,  fa:'شوید',                en:'Dill',                art:'dill',         n:7,  md:.12},
+];
+const byId = Object.fromEntries(ITEMS.map(i=>[i.id,i]));
+
+const SAUCES = {
+  marinara:{fill:'#C8402A', mottle:'#A83220'},
+  spicy:   {fill:'#B23018', mottle:'#8E2612'},
+  bianca:  {fill:'#F2E3C4', mottle:'#DFC9A0'},
+  alfredo: {fill:'#F4EADA', mottle:'#E2D2B4'},
+  pesto:   {fill:'#7C8C3B', mottle:'#65752C'},
+  paprika: {fill:'#E4B06A', mottle:'#CE9748'},
+};
+
+/* ================= i18n ================= */
+const T = {
+fa:{dir:'rtl',
+  title:'پیتزا ناپولیتان — ساخت پیتزای خودت',
+  brand:'پیتزا ناپولیتان', brandSub:'pizza · napoletana',
+  tagline:'مارگاریتا پایه‌ست؛ بقیه‌ش با سلیقهٔ تو',
+  sub:'ناپولیتانیِ درست‌وحسابی: خمیرِ سبک، پختِ چوبی و حداکثر ۵ افزودنی.',
+  chip1:'خمیر ۴۸ ساعته', chip2:'تنور چوبی ۴۸۵ درجه', chip3:'۹۰ ثانیهٔ پخت',
+  baseLine:'همه‌چیز از پایهٔ مارگاریتا شروع می‌شود: سس گوجهٔ سان مارزانو، موزارلای تازه و ریحان.',
+  steps:{sauce:'سوس',cheese:'پنیر',protein:'پروتئین',veg:'سبزیجات',finish:'پایان‌بندی'},
+  notes:{
+    sauce:'سس، پایهٔ طعم است. مارینارا پیش‌فرضِ مارگاریتاست؛ بقیه جایگزین می‌شوند و به سقف افزودنی افزوده نمی‌شوند.',
+    cheese:'موزارلای تازه همیشه بخشی از پایه است و جدا کردنش غیرممکن است؛ بقیه اختیاری‌اند.',
+    protein:'در کلاسیک ناپولیتانا خبری از این‌ها نیست، ولی انتخاب با توست؛ با رعایت سقف ۵ افزودنی.',
+    veg:'سبزیجاتِ کبابی و تازه، همان چیزی هستند که پیتزا را از شلوغی نجات می‌دهند.',
+    finish:'این‌ها بعد از تنور روی پیتزا می‌روند: تازگی و عطرِ آخرین لایه.',
+  },
+  base:'پایه', included:'در پایه هست', afterBake:'بعد از تنور',
+  count:n=>`${faNum(n)} از ${faNum(MAX_ADDONS)} افزودنی`,
+  capNote:'به سقف ۵ افزودنی رسیدی؛ سادگی، روحِ ناپولیتانه!',
+  total:'مجموع', add:'افزودن به سبد خرید',
+  cart:'سبد خرید', cartBtn:'سبد خرید', empty:'سبدت خالیه؛ اول یه مارگاریتا بساز.',
+  buildNext:'ساخت پیتزای بعدی', place:'ثبت سفارش', close:'بستن', remove:'حذف',
+  demo:'دموی فرانت‌اند — هیچ پرداخت یا داده‌ای در کار نیست.',
+  added:'به سبد اضافه شد', orderDone:'سفارش ثبت شد (نمایشی)', orderNo:'کد سفارش', back:'بازگشت به منو',
+  foot:'دموی فرانت‌اند — هیچ پرداخت یا داده‌ای ارسال نمی‌شود.',
+  switchLang:'Switch to English',
+  pizzaName:(base,rest)=>rest.length? base+' با '+rest.join('، ') : base,
+},
+en:{dir:'ltr',
+  title:'Neapolitan Pizza — build your own',
+  brand:'Pitza Napoletana', brandSub:'pizza · napoletana',
+  tagline:'Margherita is the base; the rest is your taste',
+  sub:'Honest Neapolitan pizza: light dough, wood-fired bake, and 5 toppings at most.',
+  chip1:'48-hour dough', chip2:'485° wood oven', chip3:'90-second bake',
+  baseLine:'Everything starts from a Margherita base: San Marzano tomato, fresh mozzarella and basil.',
+  steps:{sauce:'Sauce',cheese:'Cheese',protein:'Protein',veg:'Vegetables',finish:'Finish'},
+  notes:{
+    sauce:'Sauce is the base of the flavor. Marinara is the Margherita default; swaps do not count toward the topping cap.',
+    cheese:'Fresh mozzarella is always part of the base, no way around it; the rest are optional.',
+    protein:'You will not find these in a classic Napoletana, but it is your call within the 5-topping cap.',
+    veg:'Roasted and fresh vegetables are what keep a Neapolitan pizza from getting crowded.',
+    finish:'These go on after the oven: the fresh, fragrant last layer.',
+  },
+  base:'base', included:'in the base', afterBake:'after the oven',
+  count:n=>`${n} of ${MAX_ADDONS} toppings`,
+  capNote:'You reached the 5-topping cap; simplicity is the soul of Napoletana.',
+  total:'Total', add:'Add to cart',
+  cart:'Cart', cartBtn:'Cart', empty:'Your cart is empty; build a Margherita first.',
+  buildNext:'Build another pizza', place:'Place order', close:'Close', remove:'Remove',
+  demo:'Frontend demo — no payment, nothing is sent.',
+  added:'Added to cart', orderDone:'Order placed (demo)', orderNo:'Order code', back:'Back to menu',
+  foot:'Frontend demo — no payment, nothing is sent.',
+  switchLang:'تغییر به فارسی',
+  pizzaName:(base,rest)=>rest.length? base+' with '+rest.join(', ') : base,
+}};
+
+/* ================= utils ================= */
+function faNum(n){return Number(n).toLocaleString('fa-IR')}
+function fmt(n){return lang==='fa'? faNum(n)+' تومان' : n.toLocaleString('en-US')+' Toman'}
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let t=seed>>>0;return()=>{t|=0;t=t+0x6D2B79F5|0;let r=Math.imul(t^t>>>15,1|t);r=r+Math.imul(r^r>>>7,61|r)^r;return((r^r>>>14)>>>0)/4294967296}}
+function pick(r,arr){return arr[Math.floor(r()*arr.length)]}
+
+/* smooth closed blob (Catmull-Rom) */
+function blobPath(r,wob,cx,cy,n,rand){
+  const pts=[];
+  for(let i=0;i<n;i++){
+    const a=((i*360/n)+(rand()*14-7))*Math.PI/180;
+    const rr=r*(1+(rand()*2-1)*wob);
+    pts.push([cx+Math.cos(a)*rr, cy+Math.sin(a)*rr]);
+  }
+  const N=pts.length;
+  let d=`M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)}`;
+  for(let i=0;i<N;i++){
+    const p0=pts[(i-1+N)%N],p1=pts[i],p2=pts[(i+1)%N],p3=pts[(i+2)%N];
+    d+=` C ${(p1[0]+(p2[0]-p0[0])/6).toFixed(1)} ${(p1[1]+(p2[1]-p0[1])/6).toFixed(1)} ${(p2[0]-(p3[0]-p1[0])/6).toFixed(1)} ${(p2[1]-(p3[1]-p1[1])/6).toFixed(1)} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}`;
+  }
+  return d+' Z';
+}
+/* random scatter with min-distance rejection, deterministic per id */
+function place(id,count,md,maxR=0.88){
+  const rand=rng(hash(id));const out=[];
+  for(let i=0;i<count;i++){
+    let r=.3,a=0;
+    for(let t=0;t<10;t++){
+      r=Math.sqrt(rand())*maxR; a=rand()*360;
+      const ok=out.every(p=>{
+        const da=Math.min(Math.abs(p.a-a),360-Math.abs(p.a-a));
+        return Math.sqrt((p.r-r)**2+2*p.r*r*(1-Math.cos(da*Math.PI/180)))>md;
+      });
+      if(ok)break;
+    }
+    out.push({r,a,rot:rand()*360,s:.85+rand()*.3,flip:rand()>.5});
+  }
+  return out;
+}
+
+/* ================= topping art (all pre-baked looks, local coords) ================= */
+const speck=(x,y,rx,ry,rot,fill,o)=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(${rot} ${x} ${y})" fill="${fill}" opacity="${o}"/>`;
+const ART={
+pepperoni(r){let s=`<circle r="30" fill="#A83A20"/><circle r="30" fill="none" stroke="#7E2410" stroke-width="4.5"/><circle r="22" fill="#C2502F"/>`;
+  for(let i=0;i<4;i++){const a=r()*360,d=r()*18;s+=speck(Math.cos(a*Math.PI/180)*d,Math.sin(a*Math.PI/180)*d,2.5+r()*2,1.8+r()*1.5,r()*180,'#E9BBA3',.9)}
+  return s+`<ellipse cx="-9" cy="-10" rx="11" ry="6" transform="rotate(-24)" fill="#FFEFD9" opacity=".14"/>`},
+salami(r){let s=`<circle r="27" fill="#C26B5C"/><circle r="27" fill="none" stroke="#E4CBAD" stroke-width="5"/><circle r="27" fill="none" stroke="#94483C" stroke-width="2"/>`;
+  for(let i=0;i<5;i++){const a=r()*360,d=r()*17;s+=speck(Math.cos(a*Math.PI/180)*d,Math.sin(a*Math.PI/180)*d,1.8+r()*1.6,1.4+r()*1.2,r()*180,'#8E4438',.8)}
+  return s},
+bacon(r){const w=3+r()*4;
+  return `<path d="M -44 ${-6+w} C -30 ${-14-w} -16 ${0+w} -2 ${-10-w} C 12 ${-18-w} 28 ${-2+w} 44 ${-10-w} L 44 ${8+w} C 30 ${14-w} 16 ${2+w} 2 ${10-w} C -12 ${18+w} -28 ${4-w} -44 ${12+w} Z" fill="#A34A2C" stroke="#6E2C14" stroke-width="2.5"/>
+  <path d="M -40 ${-2+w} C -26 ${-10-w} -12 ${4+w} 2 ${-6-w} C 16 ${-14-w} 30 ${0+w} 42 ${-6-w}" stroke="#E8C0A8" stroke-width="5" fill="none" stroke-linecap="round" opacity=".85"/>
+  <path d="M -38 ${10+w} C -24 ${2-w} -10 ${14+w} 4 ${4-w} C 18 ${-4-w} 32 ${10+w} 42 ${4-w}" stroke="#DCA98C" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".7"/>`},
+chorizo(r){let s=`<path d="M -20 -6 Q -22 -18 -8 -21 Q 8 -24 17 -15 Q 25 -7 20 4 Q 16 14 2 15 Q -12 16 -18 6 Q -21 0 -20 -6 Z" fill="#B44E22"/>`;
+  for(let i=0;i<5;i++){const a=r()*360,d=r()*14;s+=speck(Math.cos(a*Math.PI/180)*d,Math.sin(a*Math.PI/180)*d,1.6+r()*1.4,1.3+r(),r()*180,'#7E3212',.85)}
+  return s+`<ellipse cx="-6" cy="-12" rx="8" ry="4" transform="rotate(-18)" fill="#E8934F" opacity=".4"/>`},
+steak(r){const rot=r()*180;
+  return `<g transform="rotate(${rot})"><rect x="-32" y="-13" width="64" height="26" rx="11" fill="#8A5232"/><rect x="-32" y="-13" width="64" height="26" rx="11" fill="none" stroke="#5E3418" stroke-width="2.5"/><path d="M -24 -3 H 24 M -20 6 H 20" stroke="#5E3418" stroke-width="3.5" stroke-linecap="round" opacity=".7"/><path d="M -24 -8 Q 0 -13 24 -8" stroke="#A96C42" stroke-width="3.5" fill="none" stroke-linecap="round" opacity=".8"/></g>`},
+shrimp(r){const rot=r()*360;
+  return `<g transform="rotate(${rot})"><path d="M -14 10 A 17 17 0 1 1 15 9" fill="none" stroke="#E9896B" stroke-width="10" stroke-linecap="round"/><path d="M -14 10 A 17 17 0 1 1 15 9" fill="none" stroke="#F6B49B" stroke-width="4" stroke-linecap="round" stroke-dasharray="4 7"/><path d="M -18 6 L -26 14 L -13 15 Z" fill="#E9896B"/><circle cx="12" cy="-14" r="2.2" fill="#8E4530"/></g>`},
+chicken(r){return `<path d="M -22 -8 Q -25 -19 -11 -22 Q 6 -25 16 -18 Q 25 -11 21 0 Q 18 11 4 13 Q -10 15 -17 6 Q -24 -2 -22 -8 Z" fill="#D2A05C"/><path d="M -14 -14 Q 0 -18 11 -11" stroke="#E4C084" stroke-width="4.5" fill="none" stroke-linecap="round"/><path d="M -13 -1 H 13 M -11 7 H 11" stroke="#9A6A2E" stroke-width="3.5" stroke-linecap="round" opacity=".7"/>`},
+mushroom(r){const rot=r()*360;
+  return `<g transform="rotate(${rot})"><path d="M -26 11 Q 0 -37 26 11 L 19 19 Q 0 25 -19 19 Z" fill="#C9A87B"/><path d="M -19 17 Q 0 23 19 17 L 19 21 Q 0 27 -19 21 Z" fill="#EFE6D4"/><path d="M -12 12 L -10 18 M -4 14 L -3 20 M 5 14 L 4 20 M 12 12 L 10 18" stroke="#A78B60" stroke-width="2" stroke-linecap="round"/><path d="M -7 18 L 7 18 L 5 35 Q 0 39 -5 35 Z" fill="#EFE6D4" stroke="#C9A87B" stroke-width="1.6"/></g>`},
+onion(r){const rot=r()*360;
+  return `<g transform="rotate(${rot})"><path d="M -24 -4 Q -26 -16 -10 -19 Q 8 -22 18 -13 Q 25 -5 19 6 Q 13 15 -2 15 Q -16 15 -21 6 Q -24 1 -24 -4 Z" fill="#8A5228" opacity=".95"/><path d="M -16 -8 Q -4 -13 10 -6 M -15 2 Q -2 8 12 1 M -8 10 Q 4 13 12 8" stroke="#A56A34" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M -12 -12 Q 0 -16 12 -10" stroke="#C58B50" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".8"/></g>`},
+pepper(r){const a0=r()*360;
+  return `<path d="M ${Math.cos(a0*Math.PI/180)*24} ${Math.sin(a0*Math.PI/180)*24} A 24 24 0 0 1 ${Math.cos((a0+130)*Math.PI/180)*24} ${Math.sin((a0+130)*Math.PI/180)*24}" fill="none" stroke="#C4572C" stroke-width="13" stroke-linecap="round"/>
+  <path d="M ${Math.cos(a0*Math.PI/180)*24} ${Math.sin(a0*Math.PI/180)*24} A 24 24 0 0 1 ${Math.cos((a0+130)*Math.PI/180)*24} ${Math.sin((a0+130)*Math.PI/180)*24}" fill="none" stroke="#E08A54" stroke-width="5" stroke-linecap="round" opacity=".8"/>
+  <path d="M ${Math.cos(a0*Math.PI/180)*29} ${Math.sin(a0*Math.PI/180)*29} A 29 29 0 0 1 ${Math.cos((a0+130)*Math.PI/180)*29} ${Math.sin((a0+130)*Math.PI/180)*29}" fill="none" stroke="#5E2410" stroke-width="2.6" stroke-linecap="round" opacity=".6" stroke-dasharray="5 8"/>`},
+cherry(r){return `<circle r="20" fill="#C94232"/><circle r="15" fill="#E9806F"/><path d="M 0 0 L 10 -8 M 0 0 L -9 -10 M 0 0 L 9 7" stroke="#F4B29B" stroke-width="3" stroke-linecap="round"/><ellipse cx="-7" cy="-9" rx="5" ry="3" transform="rotate(-30 -7 -9)" fill="#FFD9C4" opacity=".8"/>`},
+olive(r){return `<path d="M 16 0 A 16 16 0 1 0 -16 0 A 16 16 0 1 0 16 0 Z M 7 0 A 7 7 0 1 1 -7 0 A 7 7 0 1 1 7 0 Z" fill="#453A32" fill-rule="evenodd"/><path d="M -11 -9 A 14 14 0 0 1 3 -15" stroke="#6E5B4C" stroke-width="3" fill="none" stroke-linecap="round"/>`},
+goat(r){let s='';for(let i=0;i<3;i++){const x=(r()-.5)*26,y=(r()-.5)*22,rot=r()*180,sc=.7+r()*.5;
+  s+=`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${sc})"><path d="M -13 4 L -7 -8 L 8 -7 L 13 3 L 4 10 Z" fill="#DDD5C0"/><path d="M -13 2 L -7 -10 L 8 -9 L 13 1 L 4 8 Z" fill="#F6F1E4"/></g>`}
+  return s},
+parm(r){let s='';for(let i=0;i<3;i++){const x=(r()-.5)*26,y=(r()-.5)*24,rot=r()*180,w=17+r()*9;
+  s+=`<g transform="translate(${x} ${y}) rotate(${rot})"><path d="M ${-w} 0 L ${-w+4} -5 L ${w} -2 L ${w-4} 3 Z" fill="#D9C48F"/><path d="M ${-w} 2 L ${-w+4} -3 L ${w} 0 L ${w-4} 5 Z" fill="#F1E3BC"/></g>`}
+  return s},
+cheddar(r){const rot=r()*90-45;
+  return `<g transform="rotate(${rot})"><rect x="-13" y="-11" width="26" height="24" rx="5" fill="#B4720F"/><rect x="-13" y="-13" width="26" height="24" rx="5" fill="#D98E1E"/><rect x="-9" y="-9" width="11" height="9" rx="3.5" fill="#EEAC42" opacity=".9"/></g>`},
+stracc(r){const rot=r()*40-20;
+  return `<g transform="rotate(${rot})"><path d="M -30 6 Q -33 -12 -14 -18 Q 6 -24 22 -14 Q 34 -5 28 8 Q 22 19 2 20 Q -18 21 -30 6 Z" fill="#FBF4E4"/><path d="M -18 -2 Q -4 -10 12 -3 M -12 8 Q 2 13 16 6" stroke="#E4D3B2" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="-10" cy="-10" rx="10" ry="5" transform="rotate(-18)" fill="#FFFFFF" opacity=".55"/></g>`},
+basil(r){const rot=-30+r()*60;
+  return `<g transform="rotate(${rot})"><path d="M 0 -24 C 14 -15 16 7 0 26 C -16 7 -14 -15 0 -24 Z" fill="#4E9B3F"/><path d="M 0 -18 L 0 20" stroke="#7FBF6B" stroke-width="2.4" stroke-linecap="round"/><path d="M 0 -4 Q 7 -3 10 3 M 0 8 Q -7 9 -10 14" stroke="#7FBF6B" stroke-width="1.8" fill="none" stroke-linecap="round"/></g>`},
+dill(r){const rot=r()*360;
+  return `<g transform="rotate(${rot})" stroke="#6E9C4A" stroke-width="2" stroke-linecap="round" fill="none"><path d="M 0 16 L 0 -14"/><path d="M 0 -2 Q -8 -6 -12 -14 M 0 -2 Q 8 -6 12 -14 M 0 -8 Q -6 -12 -8 -18 M 0 -8 Q 6 -12 8 -18"/></g>`},
+chili(r){return `<rect x="-4" y="-1.6" width="8" height="3.2" rx="1.6" fill="${pick(r,['#C24418','#A83812','#D45522'])}" transform="rotate(${r()*180})"/>`},
+};
+
+/* ================= pizza renderer ================= */
+const C=500, CRUST_R=468, SAUCE_R=354;
+const R2=(x,y)=>Math.sqrt((x-C)**2+(y-C)**2);
+
+function pizzaContent(){
+  const sauce=SAUCES[sauceSel];
+  const rs=rng(hash('sauce-'+sauceSel));
+  const rc=rng(hash('moz'));
+  const cr=rng(hash('crust'));
+  let s='';
+
+  /* cornicione: puffy, hand-formed, leopard-charred */
+  s+=`<path d="${blobPath(CRUST_R,.02,C,C,15,rc)}" fill="#E2AC60"/>`;
+  s+=`<path d="${blobPath(CRUST_R-8,.02,C,C,15,rc)}" fill="#EDC27A" opacity=".8"/>`;
+  s+=`<path d="${blobPath(CRUST_R-16,.025,C,C,15,rc)}" fill="#F1CF8E" opacity=".7"/>`;
+  for(let i=0;i<34;i++){
+    const a=cr()*360, band=CRUST_R-16-cr()*66;
+    s+=speck(C+Math.cos(a*Math.PI/180)*band, C+Math.sin(a*Math.PI/180)*band, 4+cr()*10, 3.5+cr()*8, cr()*180, cr()>.5?'#5C3312':'#7A4218', .35+cr()*.45);
+  }
+  s+=`<path d="${blobPath(SAUCE_R+9,.012,C,C,15,rc)}" fill="none" stroke="#8E5A24" stroke-width="8" opacity=".24"/>`;
+  s+=`<path d="${blobPath(CRUST_R-34,.06,C,C,12,rc)}" fill="#FFF1D6" opacity=".14"/>`;
+
+  /* sauce (thin center, to the cornicione) */
+  s+=`<path d="${blobPath(SAUCE_R,.045,C,C,12,rs)}" fill="${sauce.fill}"/>`;
+  for(let i=0;i<7;i++){
+    const a=rs()*360,d=rs()*SAUCE_R*.8;
+    s+=speck(C+Math.cos(a*Math.PI/180)*d, C+Math.sin(a*Math.PI/180)*d, 22+rs()*34, 16+rs()*26, rs()*180, sauce.mottle, .3);
+  }
+
+  /* fresh mozzarella: big melt pools, sauce visible between */
+  const mozExtra = addons.has('xmozz');
+  const mozCount = mozExtra? 10 : 6;
+  const rand=rng(hash('moz'));
+  const blobs=[];
+  for(let i=0;i<mozCount;i++){
+    let x,y,tries=0;
+    do{
+      const a=rand()*360, d=Math.sqrt(rand())*SAUCE_R*.74;
+      x=C+Math.cos(a)*d; y=C+Math.sin(a)*d; tries++;
+    }while(tries<12 && blobs.some(b=>Math.hypot(b[0]-x,b[1]-y)<170));
+    blobs.push([x,y]);
+    const rr = i<6? 84+rand()*36 : 66+rand()*28;
+    s+=`<path d="${blobPath(rr,.2,x,y,10,rand)}" fill="#F2E7D3"/>`;
+    s+=`<path d="${blobPath(rr,.2,x,y,10,rand)}" fill="none" stroke="#D9BC8C" stroke-width="4" opacity=".5"/>`;
+    if(rand()>.35) s+=speck(x+(rand()*2-1)*rr*.4, y+(rand()*2-1)*rr*.4, 9+rand()*13, 6+rand()*9, rand()*180, '#B97B32', .32);
+  }
+
+  /* base Margherita basil: a few wilted leaves unless fresh basil is chosen */
+  if(!addons.has('basil')){
+    for(const p of place('basil-base',5,.18,.7)){
+      const x=C+Math.cos(p.a*Math.PI/180)*p.r*SAUCE_R;
+      const y=C+Math.sin(p.a*Math.PI/180)*p.r*SAUCE_R;
+      s+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${p.rot.toFixed(0)}) scale(${p.s.toFixed(2)})"><path d="M 0 -24 C 14 -15 16 7 0 26 C -16 7 -14 -15 0 -24 Z" fill="#3E6B2E"/><path d="M 0 -18 L 0 20" stroke="#5E8C46" stroke-width="2.4" stroke-linecap="round"/></g>`;
+    }
+  }
+
+  /* add-on layers: cheese > protein > veg > finish */
+  const order=['cheese','protein','veg','finish'];
+  for(const cat of order){
+    for(const id of addons){
+      const it=byId[id];
+      if(it.cat!==cat) continue;
+      if(id==='xmozz') continue;
+      if(it.swirl){ continue; }
+      const art=ART[it.art];
+      if(!art) continue;
+      for(const p of place(it.id,it.n,it.md)){
+        const x=C+Math.cos(p.a*Math.PI/180)*p.r*SAUCE_R;
+        const y=C+Math.sin(p.a*Math.PI/180)*p.r*SAUCE_R;
+        s+=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${p.rot.toFixed(0)}) scale(${(p.s).toFixed(2)} ${p.flip?'-'+p.s.toFixed(2):p.s.toFixed(2)})">${art(rng(hash(it.id+p.a.toFixed(0))))}</g>`;
+      }
+    }
+  }
+
+  /* post-oven drizzles */
+  for(const id of ['honey','balsamic']){
+    if(!addons.has(id)) continue;
+    const it=byId[id], rand=rng(hash('sw-'+id));
+    let d='';
+    for(let t=0;t<=58;t++){
+      const ang=t/58*2.3*2*Math.PI+(rand()*2-1)*.07;
+      const rad=36+t/58*(SAUCE_R*.82)+(rand()*2-1)*16;
+      d+=(t?'L':'M')+(C+Math.cos(ang)*rad).toFixed(0)+' '+(C+Math.sin(ang)*rad).toFixed(0)+' ';
+    }
+    s+=`<path d="${d}" fill="none" stroke="${it.color}" stroke-width="${id==='honey'?7:6}" stroke-linecap="round" opacity=".8"/>`;
+  }
+
+  /* sheen */
+  s+=`<ellipse cx="380" cy="330" rx="300" ry="230" fill="#FFF6E0" opacity=".1"/>`;
+  return s;
+}
+
+function pizzaSVG(width){
+  return `<svg viewBox="0 0 1000 1000" width="${width}" height="${width}" role="img" aria-label="pizza">${pizzaContent()}</svg>`;
+}
+
+/* ================= state ================= */
+let lang='fa';
+let sauceSel='marinara';
+const addons=new Set();
+let cart=[];
+let activeCat='sauce';
+
+const $=id=>document.getElementById(id);
+const t=k=>{const v=T[lang][k];return typeof v==='function'?v():v};
+
+function addonCount(){return addons.size}
+function totalPrice(){return BASE_PRICE + (byId[sauceSel].price) + [...addons].reduce((s,id)=>s+byId[id].price,0)}
+function pizzaTitle(){
+  const rest=[...addons].map(id=>byId[id][lang]);
+  return T[lang].pizzaName(lang==='fa'?'مارگاریتا':'Margherita', rest);
+}
+
+/* ================= render ================= */
+const ICON_CHECK='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l5 5L20 7"/></svg>';
+const ICON_BAG='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1.2 13.2a1 1 0 0 1-1 1.1H5.8a1 1 0 0 1-1-1.1L6 7Z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>';
+
+function thumb(item){
+  if(item.swirl) return `<svg viewBox="-42 -42 84 84"><path d="M -30 18 Q -10 -26 8 -6 Q 22 10 30 -14" fill="none" stroke="${item.color}" stroke-width="9" stroke-linecap="round"/></svg>`;
+  if(item.id==='xmozz') return `<svg viewBox="-42 -42 84 84"><path d="M -24 -6 Q -20 -24 2 -20 Q 24 -16 20 4 Q 16 22 -6 20 Q -26 16 -24 -6 Z" fill="#F2E7D3"/><path d="M 14 16 Q 26 10 30 -4 L 34 0 Q 30 16 16 22 Z" fill="#F2E7D3"/><ellipse cx="-4" cy="-8" rx="9" ry="5" transform="rotate(-20 -4 -8)" fill="#B97B32" opacity=".3"/></svg>`;
+  if(item.art) return `<svg viewBox="-42 -42 84 84"><g>${ART[item.art](rng(hash(item.id+'t')))}</g></svg>`;
+  if(item.id==='mozzarella') return `<svg viewBox="-42 -42 84 84"><circle r="34" fill="#F2E7D3"/><circle r="34" fill="none" stroke="#D9BC8C" stroke-width="4"/><ellipse cx="8" cy="-8" rx="10" ry="6" transform="rotate(-20 8 -8)" fill="#B97B32" opacity=".3"/></svg>`;
+  if(item.cat==='sauce'){const sc=SAUCES[item.id];return `<svg viewBox="-42 -42 84 84"><circle r="32" fill="${sc.fill}"/><ellipse cx="-10" cy="-10" rx="12" ry="8" transform="rotate(-25 -10 -10)" fill="#FFF6E0" opacity=".3"/>${speck(14,8,9,6,20,sc.mottle,.6)}</svg>`}
+  return '';
+}
+
+function renderStage(){
+  $('stage').innerHTML=pizzaSVG();
+}
+
+function renderTabs(){
+  $('tabs').innerHTML=CATEGORIES.map((c,i)=>`
+    <button type="button" class="step-tab" role="tab" aria-selected="${c===activeCat}" data-cat="${c}">
+      <span class="n">${lang==='fa'?faNum(i+1):i+1}</span>
+      <span>${t('steps')[c]}</span>
+    </button>`).join('');
+}
+
+function renderOpts(){
+  const capped=addonCount()>=MAX_ADDONS;
+  const items=ITEMS.filter(i=>i.cat===activeCat);
+  $('opts').innerHTML=items.map(it=>{
+    const isSauce=it.cat==='sauce';
+    const on = isSauce ? sauceSel===it.id : (it.id==='mozzarella' ? true : addons.has(it.id));
+    const dis = !isSauce && !it.base && it.id!=='mozzarella' && capped && !addons.has(it.id);
+    const inc = it.base;
+    const price = it.price===0
+      ? (inc? `<span class="free">${t('included')}</span>` : `<span class="free">${lang==='fa'?'رایگان':'Free'}</span>`)
+      : '+'+ (lang==='fa'? faNum(it.price)+' تومان' : it.price.toLocaleString('en-US')+' Toman');
+    const badges = (it.id==='mozzarella'?`<span class="inc-badge">${t('included')}</span>`
+      : it.cat==='finish'?`<span class="ab-badge">${t('afterBake')}</span>`:(inc?`<span class="inc-badge">${t('base')}</span>`:''));
+    return `<button type="button" class="card ${on?'sel':''} ${inc?'inc':''}" data-id="${it.id}"
+      ${dis?'disabled':''} aria-pressed="${on}">
+      <span class="thumb">${thumb(it)}</span>
+      <span class="meta"><span class="nm">${it[lang]}</span><span class="pr">${price}</span></span>
+      ${badges ? badges : `<span class="state">${ICON_CHECK}</span>`}
+    </button>`;
+  }).join('');
+}
+
+function renderPanelText(){
+  $('stepNote').textContent=t('notes')[activeCat];
+  const chip=$('countChip');
+  const n=addonCount();
+  chip.textContent=T[lang].count(n);
+  chip.classList.toggle('full',n>=MAX_ADDONS);
+  chip.title=n>=MAX_ADDONS?t('capNote'):'';
+}
+
+function renderBar(){
+  const el=$('barPrice');
+  el.textContent=fmt(totalPrice());
+  el.classList.remove('tick');void el.offsetWidth;el.classList.add('tick');
+}
+
+function renderCart(){
+  const badge=$('cartBadge');
+  const n=cart.reduce((s,l)=>s+l.qty,0);
+  badge.hidden=n===0;
+  badge.textContent=lang==='fa'?faNum(n):n;
+  const body=$('drawerBody'), ft=$('drawerFt');
+  if(cart.length===0){
+    body.innerHTML=`<div class="empty-cart">
+      <svg viewBox="0 0 120 84" fill="none" stroke="#B99C72" stroke-width="4"><rect x="10" y="30" width="100" height="44" rx="8" fill="#E9D7B8"/><path d="M10 30 L60 8 L110 30"/><circle cx="60" cy="52" r="11" stroke-dasharray="4 5"/></svg>
+      <p>${t('empty')}</p></div>`;
+    ft.innerHTML='';
+    return;
+  }
+  body.innerHTML=cart.map((l,i)=>`
+    <div class="line-item">
+      <div class="line-thumb">${pizzaSVG(58)}</div>
+      <div class="line-meta">
+        <div class="line-name">${l.name}</div>
+        <div class="line-price">${fmt(l.price*l.qty)}</div>
+      </div>
+      <div class="qty" role="group" aria-label="qty">
+        <button type="button" data-q="-1" data-i="${i}" aria-label="-"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+        <span>${lang==='fa'?faNum(l.qty):l.qty}</span>
+        <button type="button" data-q="1" data-i="${i}" aria-label="+"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+      </div>
+      <button type="button" class="rm" data-rm="${i}" aria-label="${t('remove')||'remove'}"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
+    </div>`).join('');
+  const total=cart.reduce((s,l)=>s+l.price*l.qty,0);
+  ft.innerHTML=`
+    <div class="drawer-total"><span class="lbl">${t('total')}</span><span class="val display">${fmt(total)}</span></div>
+    <div class="drawer-btns">
+      <button type="button" class="add-btn" id="placeBtn" style="width:100%"><span>${t('place')}</span></button>
+      <button type="button" class="ghost-btn" id="nextBtn">${t('buildNext')}</button>
+    </div>
+    <p class="demo-note">${t('demo')}</p>`;
+}
+
+function renderAllText(){
+  document.documentElement.lang=lang;
+  document.documentElement.dir=T[lang].dir;
+  document.title=t('title');
+  document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=t(el.dataset.t)});
+  $('langBtn').textContent=lang==='fa'?'EN':'فا';
+  $('langBtn').setAttribute('aria-label',t('switchLang'));
+  $('cartBtn').setAttribute('aria-label',t('cartBtn'));
+  $('closeDrawer').setAttribute('aria-label',t('close'));
+  $('addBtn').setAttribute('aria-label',t('add'));
+}
+
+function renderAll(){
+  renderAllText();
+  renderTabs();
+  renderOpts();
+  renderPanelText();
+  renderBar();
+  renderCart();
+  renderStage();
+}
+
+/* ================= interactions ================= */
+document.addEventListener('click',e=>{
+  const tab=e.target.closest('.step-tab');
+  if(tab){activeCat=tab.dataset.cat;renderTabs();renderOpts();renderPanelText();return}
+  const card=e.target.closest('.card');
+  if(card && !card.disabled){
+    const it=byId[card.dataset.id];
+    if(it.cat==='sauce'){sauceSel=it.id;renderOpts();renderStage();renderBar();return}
+    if(it.base||it.id==='mozzarella')return;
+    if(addons.has(it.id)){addons.delete(it.id)}
+    else{
+      if(addonCount()>=MAX_ADDONS)return;
+      addons.add(it.id);
+    }
+    renderOpts();renderPanelText();renderStage();renderBar();
+    return;
+  }
+  const q=e.target.closest('[data-q]');
+  if(q){
+    const line=cart[+q.dataset.i];
+    line.qty+=+q.dataset.q;
+    if(line.qty<=0)cart.splice(+q.dataset.i,1);
+    renderCart();return;
+  }
+  const rm=e.target.closest('[data-rm]');
+  if(rm){cart.splice(+rm.dataset.rm,1);renderCart();return}
+  if(e.target.closest('#placeBtn')){
+    const code=(lang==='fa'?'TD-':'NP-')+Math.floor(1000+Math.random()*9000);
+    cart=[];renderCart();
+    $('drawerBody').innerHTML=`<div class="confirm">
+      <div class="ok"><svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="#3E7C36" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 25l9 9 19-20"/></svg></div>
+      <h3 class="display">${t('orderDone')}</h3>
+      <p>${t('orderNo')}: <span class="code">${code}</span><br>${t('demo')}</p></div>`;
+    $('drawerFt').innerHTML='';
+    return;
+  }
+  if(e.target.closest('#nextBtn')){resetBuilder();closeDrawer();return}
+});
+
+function resetBuilder(){
+  sauceSel='marinara';addons.clear();activeCat='sauce';
+  renderAll();
+}
+function openDrawer(){$('drawer').classList.add('open');$('backdrop').classList.add('open');$('closeDrawer').focus()}
+function closeDrawer(){$('drawer').classList.remove('open');$('backdrop').classList.remove('open');$('cartBtn').focus()}
+$('cartBtn').addEventListener('click',()=>{renderCart();openDrawer()});
+$('closeDrawer').addEventListener('click',closeDrawer);
+$('backdrop').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('drawer').classList.contains('open'))closeDrawer()});
+
+let toastTimer=null;
+function toast(msg){
+  $('toastMsg').textContent=msg;
+  $('toast').classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>$('toast').classList.remove('show'),1700);
+}
+
+$('addBtn').addEventListener('click',()=>{
+  cart.push({name:pizzaTitle(),price:totalPrice(),qty:1});
+  renderCart();openDrawer();toast(t('added'));
+});
+
+$('langBtn').addEventListener('click',()=>{lang=lang==='fa'?'en':'fa';renderAll();});
+
+renderAll();
+</script>
+</body>
+</html>
